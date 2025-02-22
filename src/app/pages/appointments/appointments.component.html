@@ -1,0 +1,13 @@
+<div class="appointments-container">
+  <h1>My Appointments</h1>
+  <div *ngIf="appointments.length">
+    <ul>
+      <li *ngFor="let app of appointments">
+        {{ app.dateTime }} - {{ app.type }}
+        <button class="cancel-btn btn-fade" (click)="cancelAppointment(app.id)">Cancel</button>
+      </li>
+    </ul>
+  </div>
+  <p *ngIf="!appointments.length">No appointments booked.</p>
+</div>
+<router-outlet></router-outlet>

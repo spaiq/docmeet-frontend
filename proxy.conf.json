@@ -1,0 +1,12 @@
+{
+  "/api/*":{
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/realms/*": {
+    "target": "http://localhost:15564",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

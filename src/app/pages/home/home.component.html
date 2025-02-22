@@ -1,0 +1,16 @@
+<div class="home-container">
+  <h1>Find Available Appointments</h1>
+  <select [(ngModel)]="selectedSpeciality" (change)="searchAppointments()">
+    <option *ngFor="let spec of specialities" [value]="spec.id">{{ spec.name }}</option>
+  </select>
+  <div *ngIf="appointments.length">
+    <h2>Available Appointments</h2>
+    <ul>
+      <li *ngFor="let app of appointments">
+        {{ app.dateTime }} - {{ app.type }}
+        <button class="btn-fade" (click)="bookAppointment(app.id)">Book</button>
+      </li>
+    </ul>
+  </div>
+</div>
+<router-outlet></router-outlet>

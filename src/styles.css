@@ -1,1 +1,468 @@
-/* You can add global styles to this file, and also import other style files */
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"); */
+
+@import url("https://fonts.googleapis.com/css?family=Inter:700|Inter:400");
+
+:root {
+  --blur-amount: 130px;
+  --primary: #6820b2;
+  --secondary: #450676;
+  --accent: #c2006d;
+  --background: rgb(42, 37, 46);
+  --light-primary: #a499af;
+  --text-primary: #e5cbff;
+  --active-accent: #c72882;
+  --text: white;
+  --error: #ff6f6f;
+  --success: #7abd6d;
+  --bs-btn-hover-bg: var(--accent);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--secondary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--secondary);
+}
+
+.navbar {
+  margin-bottom: 10vh;
+}
+
+.search-container {
+  min-height: 20vh;
+}
+
+#loginBtn,
+#checkBtn {
+  padding-left: 1vw;
+  padding-right: 1vw;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--accent) 51%,
+    var(--primary)
+  )
+  var(--x, 0) / 200%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#loginBtn:hover,
+#checkBtn:hover {
+  --x: 100%;
+}
+
+#loginBtn:active,
+#checkBtn:active {
+  /* background-color: var(--active-accent);
+  border-color: var(--secondary); */
+  scale: 105%;
+  -webkit-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
+}
+
+.btn-fade {
+  padding-left: 1vw;
+  padding-right: 1vw;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--accent) 51%,
+    var(--primary)
+  )
+  var(--x, 0) / 200%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.btn-fade:hover {
+  --x: 100%;
+}
+
+.btn-fade:active {
+  scale: 105%;
+  -webkit-transition: all 0.05s ease-in-out;
+  transition: all 0.05s ease-in-out;
+}
+
+#checkBtn {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+body {
+  background-color: rgb(12, 1, 16);
+  width: 100%;
+  height: 100%;
+  padding: 1.5cm;
+}
+
+header {
+  background-color: rgb(12, 1, 16);
+}
+
+#appName {
+  font-size: calc(100% + 1vw + 1vh);
+}
+
+#appName a{
+  font-family: "Shizuru";
+  color: var(--text);
+}
+
+#appName a:visited{
+  text-decoration: none;
+  color: var(--text);
+}
+
+#blob1 {
+  width: 125vw;
+  height: 50vw;
+  border-radius: 75% 90%;
+  background-color: rgb(143, 108, 159);
+  transform: rotate(19deg);
+  filter: blur(var(--blur-amount));
+  mix-blend-mode: soft-light;
+  position: fixed;
+  top: 25vh;
+  left: -15vw;
+  z-index: -1;
+}
+
+#blob2 {
+  width: 40vw;
+  height: 50vw;
+  border-radius: 50% 33%;
+  background-color: #3d1269;
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  filter: blur(var(--blur-amount));
+  z-index: -1;
+}
+
+#blob3 {
+  width: 25vw;
+  height: 120vh;
+  border-radius: 80% 80%;
+  position: fixed;
+  top: 23%;
+  left: 75%;
+  background-color: rgba(154, 11, 197, 0.253);
+  filter: blur(var(--blur-amount));
+  z-index: -1;
+}
+
+#noiseLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: url(#noiseFilter) brightness(0.4) contrast(1.1);
+  mix-blend-mode: overlay;
+  z-index: -5;
+}
+
+body {
+  font-family: "Inter";
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Inter";
+  font-weight: 700;
+}
+
+html {
+  font-size: 100%;
+} /* 16px */
+
+h1 {
+  font-size: 4.21rem; /* 67.36px */
+}
+
+h2 {
+  font-size: 3.158rem; /* 50.56px */
+}
+
+h3 {
+  font-size: 2.369rem; /* 37.92px */
+}
+
+h4 {
+  font-size: 1.777rem; /* 28.48px */
+}
+
+h5 {
+  font-size: 1.333rem; /* 21.28px */
+}
+
+small {
+  font-size: 0.75rem; /* 12px */
+}
+
+.font-effect {
+  font-style: italic;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--text);
+  color: transparent;
+}
+
+.color-effect {
+  background: linear-gradient(120deg, var(--primary), var(--accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.doctor-pic {
+  width: 50%;
+  border-radius: 50%;
+  /*filter: invert();*/
+}
+
+.smaller-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: var(--background);
+  filter: brightness(85%);
+  /* opacity: 0.6; */
+
+  /* font-family: "Poppins", sans-serif; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* box-shadow: 0 0 1px var(--primary), 0 0 2px var(--primary),
+    0 0 3px var(--secondary), 0 0 5px var(--secondary), 0 0 8px var(--secondary),
+    0 0 8px var(--secondary); */
+}
+
+.text {
+  color: var(--text);
+}
+
+.smaller-box1 {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: var(--accent);
+  /* opacity: 0.8; */
+
+  /* font-family: "Poppins", sans-serif; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* box-shadow: 0 0 1px var(--primary), 0 0 2px var(--primary),
+    0 0 3px var(--secondary), 0 0 5px var(--secondary), 0 0 8px var(--secondary),
+    0 0 8px var(--secondary); */
+}
+
+.smaller-box header {
+  background: none;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-heading {
+  color: white;
+}
+
+header .current-date {
+  font-weight: 500;
+  color: var(--text);
+}
+
+header .icons span {
+  padding: 8px 12px;
+  color: #555;
+
+  margin: 0 5px;
+  border-radius: 50%;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+header .icons span:hover {
+  background: #eaeaea;
+}
+
+.calendar {
+  padding: 15px;
+}
+
+.calendar ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.calendar .weeks li {
+  font-weight: bold;
+  width: calc(100% / 7);
+  padding: 5px 0;
+  margin: 8px 0 8px 0;
+}
+
+.calendar .days {
+  margin-bottom: 20px;
+}
+
+li:not(.inactive) {
+  color: var(--text);
+  text-shadow: 0 0 2px var(--primary), 0 0 6px var(--accent);
+}
+
+li #text {
+  box-shadow: 0 0 3px var(--primary), 0 0 3px var(--primary);
+}
+
+.calendar .days li {
+  width: calc(100% / 7);
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.days li.inactive {
+  color: var(--light-primary);
+}
+
+.days li.inactive:nth-child(n)::after {
+  background-color: var(--error);
+}
+
+.days li.active {
+  color: #fff;
+  font-weight: bold;
+}
+
+.calendar .days li::before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.3s ease;
+}
+
+.days li:hover::before {
+  background: #e0e0e0;
+}
+
+.days li.active::before {
+  background: var(--light-primary);
+}
+
+.days li:nth-child(n) {
+  position: relative;
+}
+
+.days li:nth-child(n)::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--success);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: space-evenly;
+  /* gap: 20px; */
+
+  width: 90%;
+}
+
+.icon {
+  position: absolute;
+  width: 8%;
+  height: auto;
+  filter: invert();
+}
+
+.icon:hover {
+  scale: 140%;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.icon-background {
+  display: flex;
+  background-color: var(--accent);
+  /* align-content: center; */
+  align-items: center;
+  justify-content: space-around;
+  width: 13%;
+  border-radius: 50%;
+}
+.icon-background:before{
+  content:"";
+  display:block;
+  margin-top:100%;
+}
+
+
+.search-bar {
+  width: 90%;
+  max-width: 600px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid var(--accent);
+  border-radius: 5px;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--light-primary);
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: var(--background);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff69b4;
+}

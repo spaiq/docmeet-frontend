@@ -1,0 +1,101 @@
+<!-- Body -->
+<main class="row mt-3">
+  <!-- Lewa kolumna (50%) -->
+  <div class="col-lg-6 col-md-12 d-flex align-items-stretch">
+    <section class="hero d-flex flex-column justify-content-center w-100">
+      <h2 class="text-primary">
+        <span class="color-effect">Find doctor</span>
+        <span class="font-effect">EASY</span>
+      </h2>
+      <h1 class="fw-bold custom-heading">Let's Find Your Doctor</h1>
+      <p class="lead text-white">
+        Secure, fast, reliable. Our MFA authorization will make your data as
+        safe as it can get. Join us!
+      </p>
+      <button onclick="window.location.href='home'" id="checkBtn" class="btn btn-primary btn-lg custom-button">
+        Check available appointments
+      </button>
+    </section>
+  </div>
+
+  <!-- Prawa kolumna (50%) -->
+  <div class="col-lg-6 col-md-12 d-flex flex-column">
+    <!-- Górna część (30% wysokości) -->
+    <div class="row height-30 my-5">
+      <div
+        class="col-7 border-box d-flex align-items-center justify-content-center search-container"
+      >
+        <!-- Nowa mniejsza kolumna wewnątrz col-7 (30% mniejsza) -->
+        <div
+          class="col-8 smaller-box mx-auto border-box transparent-box d-flex flex-column justify-content-center gap-4"
+        >
+          <div class="icons-container d-flex gap-3">
+            <div class="dummy"></div>
+            <div class="icon-background">
+              <div class="dummy"></div>
+              <img class="icon" src="assets/images/medical1.png" height="240" width="240"/>
+            </div>
+            <div class="dummy"></div>
+            <div class="icon-background">
+              <div class="dummy"></div>
+              <img class="icon" src="assets/images/medical2.png" height="240" width="240"/>
+            </div>
+            <div class="dummy"></div>
+            <div class="icon-background">
+              <div class="dummy"></div>
+              <img class="icon" src="assets/images/medical3.png" height="240" width="240"/>
+            </div>
+            <div class="dummy"></div>
+            <div class="icon-background">
+              <div class="dummy"></div>
+              <img class="icon" src="assets/images/medical4.png" height="240" width="240"/>
+            </div>
+          </div>
+
+          <!-- Pasek wyszukiwania -->
+          <input
+            type="text"
+            class="search-bar form-control"
+            placeholder="Search..."
+          />
+        </div>
+        <!-- Lewa część -->
+      </div>
+      <div
+        class="col-5 border-box d-flex align-items-center justify-content-center"
+      >
+        <!-- Nowa mniejsza kolumna wewnątrz col-5 (30% mniejsza) -->
+        <div
+          class="col-7 smaller-box1 mx-auto border-box transparent-box"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Dolna część (70% wysokości) -->
+    <div class="row height-70 mt-2">
+      <div class="col-5 border-box d-flex align-items-center">
+        <!-- Nowa mniejsza kolumna wewnątrz col-5 (30% mniejsza) -->
+        <div class="col-7 smaller-box1 mx-auto border-box transparent-box d-flex gap-5 my-5">
+          <img class="doctor-pic"
+            src="assets/images/doctor-pic.png"
+
+          />
+          <div class="doctor-description">
+            <h3 class="text">Chester Huff</h3>
+            <p class="text">Cardiology, Szczecin</p>
+            <button onclick="window.location.href='home'">
+              Appointment
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-7 border-box d-flex align-items-center">
+        <!-- Nowa mniejsza kolumna wewnątrz col-7 (30% mniejsza) -->
+        <div class="col-8 smaller-box mx-auto border-box transparent-box py-5">
+          <app-calendar></app-calendar>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<router-outlet></router-outlet>
