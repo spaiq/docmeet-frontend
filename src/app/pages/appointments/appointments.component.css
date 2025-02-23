@@ -1,1 +1,23 @@
 
+.appointment-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background: var(--background);
+  border-radius: 15px;
+  max-width: 40%;
+}
+
+.text-accent{
+  color: var(--semi-accent);
+}
+
+.cancel-btn {
+  height: auto;
+}
+
+.size {
+  color: var(--semi-primary);
+  cursor: pointer;
+}

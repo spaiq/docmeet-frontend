@@ -1,13 +1,43 @@
 <div class="appointments-container">
-  <h1>My Appointments</h1>
+  <h1 class="text my-5 d-flex justify-content-center">My Appointments</h1>
+  <div class="d-flex justify-content-end sizes">
+    <ul class="list-unstyled d-flex gap-3">
+      <li *ngFor="let size of [5, 10, 20]" (click)="changePageSize(size)" [class.inactive-size]="pageSize === size" [class.size]="pageSize !== size"><a class="size">{{ size }}</a></li>
+    </ul>
+  </div>
+  <div class="d-flex justify-content-between page-nav my-3 text">
+    <button class="btn-fade" (click)="prevPage()">&#8592; Prev</button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button class="btn-fade" (click)="nextPage()">Next &#8594;</button>
+  </div>
   <div *ngIf="appointments.length">
-    <ul>
-      <li *ngFor="let app of appointments">
-        {{ app.dateTime }} - {{ app.type }}
-        <button class="cancel-btn btn-fade" (click)="cancelAppointment(app.id)">Cancel</button>
+    <ul class="d-flex flex-column gap-3 my-5 d-flex align-items-center">
+      <li class="list-unstyled appointment-item" *ngFor="let app of appointments">
+        <div class="col-sm-8 d-flex justify-content-between align-items-center text">
+          <div class="d-flex flex-column">
+            <h5 class="mb-1">{{ formatDate(app.dateTime) }}</h5>
+            <p class="mb-1">{{ app.type }}</p>
+            <small class="text-accent">{{ app.doctorName }}</small>
+            <p class="mb-1">{{ app.address }}</p>
+          </div>
+        </div>
+        <div class="col-sm-4 align-content-center">
+          <button class="cancel-btn btn-fade align-self-center" (click)="confirmCancel(app.id)">Cancel</button>
+        </div>
       </li>
     </ul>
   </div>
   <p *ngIf="!appointments.length">No appointments booked.</p>
+  <div class="d-flex justify-content-between page-nav my-3 text">
+    <button class="btn-fade" (click)="prevPage()">&#8592; Prev</button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button class="btn-fade" (click)="nextPage()">Next &#8594;</button>
+  </div>
+  <div class="d-flex justify-content-end sizes">
+    <ul class="list-unstyled d-flex gap-3">
+      <li *ngFor="let size of [5, 10, 20]" (click)="changePageSize(size)" [class.inactive-size]="pageSize === size" [class.size]="pageSize !== size"><a class="size">{{ size }}</a></li>
+    </ul>
+  </div>
+
 </div>
 <router-outlet></router-outlet>

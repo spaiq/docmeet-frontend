@@ -1,6 +1,5 @@
 .container {
   padding: 20px;
-  background-color: #f8f9fa;
   border-radius: 10px;
 }
 
@@ -11,10 +10,29 @@ select {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+.book-btn {
+  height: auto;
+  background-color: var(--accent);
+}
+
+.book-btn:hover {
+  background-color: var(--semi-accent);
+}
 
 .appointment-item {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  background: var(--background);
+  border-radius: 15px;
+}
+
+.text-accent{
+  color: var(--semi-accent);
+}
+
+.size {
+  color: var(--semi-primary);
+  cursor: pointer;
 }

@@ -5,10 +5,12 @@
 :root {
   --blur-amount: 130px;
   --primary: #6820b2;
+  --semi-primary: #9658d5;
+  --light-primary: #a499af;
   --secondary: #450676;
   --accent: #c2006d;
+  --semi-accent: #ff76bd;
   --background: rgb(42, 37, 46);
-  --light-primary: #a499af;
   --text-primary: #e5cbff;
   --active-accent: #c72882;
   --text: white;
@@ -252,6 +254,10 @@ small {
   color: var(--text);
 }
 
+.text-accent {
+  color: var(--accent);
+}
+
 .smaller-box1 {
   width: 100%;
   height: 100%;
@@ -328,7 +334,7 @@ header .icons span:hover {
   margin-bottom: 20px;
 }
 
-li:not(.inactive) {
+.days li:not(.inactive) {
   color: var(--text);
   text-shadow: 0 0 2px var(--primary), 0 0 6px var(--accent);
 }

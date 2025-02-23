@@ -1,16 +1,63 @@
-<div class="home-container">
-  <h1>Find Available Appointments</h1>
-  <select [(ngModel)]="selectedSpeciality" (change)="searchAppointments()">
-    <option *ngFor="let spec of specialities" [value]="spec.id">{{ spec.name }}</option>
-  </select>
-  <div *ngIf="appointments.length">
-    <h2>Available Appointments</h2>
-    <ul>
-      <li *ngFor="let app of appointments">
-        {{ app.dateTime }} - {{ app.type }}
-        <button class="btn-fade" (click)="bookAppointment(app.id)">Book</button>
-      </li>
-    </ul>
+<div class="container">
+  <h1 class="d-flex justify-content-center text">Find Available Appointments</h1>
+  <div class="row">
+    <div class="col-md-4 search-panel text">
+      <div class="row my-2">
+        <select class="form-select" [(ngModel)]="selectedSpeciality">
+          <option disabled selected value="null">Select Speciality</option>
+          <option *ngFor="let spec of specialities" [ngValue]="spec.id">{{ spec.name }}</option>
+        </select>
+      </div>
+      <div class="row my-2">
+      <label>Date from:
+        <input type="datetime-local" [(ngModel)]="fromDate" />
+      </label>
+      </div>
+        <div class="row my-2">
+      <label>Date to:
+        <input type="datetime-local" [(ngModel)]="toDate" />
+      </label>
+        </div>
+      <div class="row my-5">
+        <button class="btn-fade" (click)="searchAppointments()">Search</button>
+      </div>
+    </div>
+    <div class="col-md-8 results-panel" *ngIf="appointments.length">
+      <div class="d-flex justify-content-end sizes">
+        <ul class="list-unstyled d-flex gap-3">
+          <li *ngFor="let size of [10, 20, 50]" (click)="changePageSize(size)" [class.inactive-size]="pageSize === size" [class.size]="pageSize !== size"><a class="size">{{ size }}</a></li>
+        </ul>
+      </div>
+      <div class="d-flex justify-content-between page-nav my-3 text">
+        <button class="btn-fade" (click)="prevPage()">&#8592; Prev</button>
+        <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+        <button class="btn-fade" (click)="nextPage()">Next &#8594;</button>
+      </div>
+      <ul class="d-flex flex-column gap-3 my-5">
+        <li *ngFor="let app of appointments" class="appointment-item text d-flex">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1">{{ formatDate(app.dateTime) }}</h5>
+              <p class="mb-1">{{ app.type }}</p>
+              <small class="text-accent">{{ app.doctorName }}</small>
+              <p class="mb-1">{{ app.address }}</p>
+            </div>
+            <span class="badge badge-primary badge-pill">Appointment</span>
+          </div>
+          <button  (click)="bookAppointment(app.id)" class="book-btn align-self-center">Book</button>
+        </li>
+      </ul>
+      <div class="d-flex justify-content-between page-nav my-3 text">
+        <button class="btn-fade" (click)="prevPage()">&#8592; Prev</button>
+        <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+        <button class="btn-fade" (click)="nextPage()">Next &#8594;</button>
+      </div>
+      <div class="d-flex justify-content-end sizes">
+        <ul class="list-unstyled d-flex gap-3">
+          <li *ngFor="let size of [10, 20, 50]" (click)="changePageSize(size)" [class.inactive-size]="pageSize === size" [class.size]="pageSize !== size"><a class="size">{{ size }}</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

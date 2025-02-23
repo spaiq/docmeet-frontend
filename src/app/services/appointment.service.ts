@@ -17,8 +17,12 @@ export class AppointmentService {
     return this.http.get(`${this.apiUrl}/specialities`);
   }
 
-  getAvailableAppointments(specialityId: number, page: number, size: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/appointments/speciality/${specialityId}/available?page=${page}&size=${size}`);
+  getAvailableAppointments(specialityId: number, page: number, size: number, from?: string, to?: string): Observable<any> {
+    let url = `${this.apiUrl}/appointments/speciality/${specialityId}/available?page=${page}&size=${size}`;
+    if (from) url += `&from=${from}`;
+    if (to) url += `&to=${to}`;
+
+    return this.http.get(url);
   }
 
   bookAppointment(appointmentId: number): Observable<any> {
@@ -29,11 +33,19 @@ export class AppointmentService {
     return this.http.get(`${this.apiUrl}/user/current`);
   }
 
-  getPatientAppointments(patientId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/patient/${patientId}/appointments`);
+  getPatientAppointments(patientId: number, page: number, size: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/patient/${patientId}/appointments?page=${page}&size=${size}`);
   }
 
   cancelAppointment(appointmentId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/appointment/${appointmentId}/cancel`, {});
+  }
+
+  getDoctor(doctorId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/doctor/${doctorId}`);
+  }
+
+  getDoctorName(userId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/doctor/${userId}/name`, { responseType: 'text' });
   }
 }

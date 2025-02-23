@@ -10,6 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -26,7 +27,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AppComponent,
     HomeComponent,
     AppointmentsComponent,
-    HeaderComponent
+    HeaderComponent,
+    NgbModule
   ],
   providers: [
     AuthService,
