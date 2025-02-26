@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environment.dev';
-import {Observable, Subscription, switchMap, tap, throwError, timer} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { environment } from '../../environment.dev';
+import { Observable, Subscription, switchMap, tap, throwError, timer } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,51 +12,41 @@ export class AuthService {
   private authUrl = environment.authUrl;
   private refreshTokenTimer: Subscription | null = null;
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  login(): void {
+   login(): void {
     window.location.href = `${this.authUrl}/auth?client_id=${environment.clientId}&redirect_uri=${window.location.origin}/&response_type=code&scope=openid`;
   }
-
 
   handleAuthCallback(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const code = this.getAuthorizationCodeFromUrl();
       if (code) {
-
         this.exchangeCodeForTokens(code).subscribe({
-          next: () => {
-            resolve(true);
-          },
-            error: (err) => reject(err)
+          error: (err) => reject(err)
         });
-
         resolve(true);
       }
-
       resolve(false);
     });
   }
 
   private getAuthorizationCodeFromUrl(): string | null {
     const params = new URLSearchParams(window.location.search);
-
     return params.get('code');
   }
 
   isAccessTokenExpired(): boolean {
     const token = this.getToken();
     if (!token) return true;
-
     const jwtToken = JSON.parse(atob(token.split('.')[1]));
     const expires = new Date(jwtToken.exp * 1000);
     return expires.getTime() < Date.now();
   }
 
   isRefreshTokenExpired(): boolean {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = this.getRefreshToken();
     if (!refreshToken) return true;
-
     const jwtToken = JSON.parse(atob(refreshToken.split('.')[1]));
     const expires = new Date(jwtToken.exp * 1000);
     return expires.getTime() < Date.now();
@@ -76,23 +67,29 @@ export class AuthService {
   }
 
   deleteTokens(): void {
-    localStorage.removeItem('jwt_token');
-    localStorage.removeItem('refresh_token');
+    this.cookieService.delete('jwt_token', '/');
+    this.cookieService.delete('refresh_token', '/');
   }
 
   storeToken(token: string, refreshToken: string): void {
-    localStorage.setItem('jwt_token', token);
-    localStorage.setItem('refresh_token', refreshToken);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1)
+
+    this.cookieService.set('jwt_token', token, { expires, path: '/', secure: true, sameSite: 'Strict' });
+    this.cookieService.set('refresh_token', refreshToken, { expires, path: '/', secure: true, sameSite: 'Strict' });
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwt_token');
+    return this.cookieService.get('jwt_token') || null;
+  }
+
+  getRefreshToken(): string | null {
+    return this.cookieService.get('refresh_token') || null;
   }
 
   refreshToken(): Observable<string> {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = this.getRefreshToken();
     if (refreshToken) {
-
       const params = new HttpParams()
         .set('client_id', environment.clientId)
         .set('refresh_token', refreshToken)
@@ -102,7 +99,7 @@ export class AuthService {
         .pipe(
           tap((response: any) => {
             this.storeToken(response.access_token, response.refresh_token);
-          },error => {
+          }, error => {
             alert('Error while refreshing token! Logging out...');
             this.deleteTokens();
             this.stopRefreshTokenTimer();
@@ -113,7 +110,6 @@ export class AuthService {
       return throwError(() => 'No refresh token available');
     }
   }
-
 
   isAuthenticated(): boolean {
     return !!this.getToken() && !this.isAccessTokenExpired() && !this.isRefreshTokenExpired();
@@ -135,7 +131,7 @@ export class AuthService {
   }
 
   isRefreshTokenTimerStarted(): boolean {
-    return !!this.refreshTokenTimer
+    return !!this.refreshTokenTimer;
   }
 
   stopRefreshTokenTimer(): void {

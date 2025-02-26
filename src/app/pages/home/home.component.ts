@@ -46,9 +46,6 @@ export class HomeComponent implements OnInit{
 
   setDefaultDates() {
     let now = new Date();
-    console.log(now);
-    console.log(now.getMinutes());
-    console.log(now.getHours() + 2);
 
     if (now.getMinutes() >= 50) {
       now.setHours(now.getHours() + 3);
